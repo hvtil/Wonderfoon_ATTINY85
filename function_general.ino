@@ -4,15 +4,15 @@ void checkPlaying()
   {
     if (!playingRandom) {
       
-      if (amplifierstate){
-      delay(1000);
-      amplifier(0);
-      }
+     // if (amplifierstate){
+     // delay(1000);
+     // amplifier(0);
+     // }
     }
     else
     {
       delay(1000);
-      amplifier(1);
+      //amplifier(1);
       playTrackInFolder(1, 1);
     }
   }
@@ -46,7 +46,18 @@ void checkAll()
 
   switch (lastDialed[0])
   {
+   case 1:
+    //112
+    if (lastDialed[1] == 1 && checkChangeTime())
+      {
 
+        if ( lastDialed[2] = 2 )
+        {
+          playAlarm();
+        }
+        clearLastDialed();
+      }
+      break;  
     case 2:
 
       if (lastDialed[1] == 1 && checkChangeTime())

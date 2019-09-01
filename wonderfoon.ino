@@ -1,5 +1,9 @@
 /*
-  Wonderfoon Tiny85 0501T
+  Wonderfoon Tiny85 0801T
+  // 0801 amplifier switching removed 
+  //      Set pin PB5 to high to prevent reset
+  //      added 112 alarm number message.
+  
   http://wonderfoon.nl
   ATTINY85 version
 */
@@ -12,12 +16,13 @@ SoftSerial mySerial(6, 4); //RX, TX
 const int hookPin   = 2;     // the in for the telephone hook                 D6 12
 const int dialPin   = 3;    //  the in for the telephone dialpulse (yellow)  D5 14
 const int pulsePin  = 0;    // the in for the telephone dialbusy (green)      D7 13
-const int ampPin    = 1;    // to turn amplifier on / off                   D2 15
-const int busyPin    = 5;   // when player is playing this pim is 1
+//const int ampPin    = 5;    // to turn amplifier on / off                   D2 15
+const int resetPin    =5;     // define agains unexpected behaviour
+const int busyPin    = 1;   // when player is playing this pim is 1
 unsigned long lastDialDebounceTime = 0;   // the last time the dial pin was
 unsigned long dialDebounceDelay = 50;     // the debounce time;
 unsigned long lastPulseDebounceTime = 0;  // the last time the pulse pin was
-unsigned long pulseDebounceDelay = 20;    // the debounce time;
+unsigned long pulseDebounceDelay = 15;    // the debounce time;
 
 //int num;      // dialpad number
 //int lastNum;  //
@@ -56,13 +61,15 @@ void setup() {
   pinMode(dialPin, INPUT_PULLUP);
   pinMode(pulsePin, INPUT_PULLUP);
   pinMode(busyPin, INPUT_PULLUP);
-  pinMode(ampPin, OUTPUT);                        //Set Aplifier pin to output
-
+//  pinMode(ampPin, OUTPUT);                        //Set Aplifier pin to output
+  pinMode(resetPin, OUTPUT);
+  
   mp3Wake();
   delay(200);
   //delay(1000);// set volume to read value ; 00 - 30
   playTrackInFolder(10, 4);                               // Wonderfoon has started
   delay(2000);
+  digitalWrite(resetPin, 1);
   //put mp3 in sleep mode to save battery
   playVolume();                                           // play vulume status
   playFolder(folderNumber);                               // play folder number status

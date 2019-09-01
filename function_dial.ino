@@ -59,6 +59,9 @@ void waitForDial()
         addLastTime(millis());         // add last time for pin
         checkAll();
         playTrackInFolder(countedPulses, folderNumber);
+        //reset folder if 112
+        if (countedPulses == 112)
+        {folderNumber = EEPROM_getValue(6001);}  
       }
     }
 
