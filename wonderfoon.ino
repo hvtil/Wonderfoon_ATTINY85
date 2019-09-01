@@ -4,7 +4,7 @@
   //      Set pin PB5 to high to prevent reset
   //      added 112 alarm number message.
   
-  http://wonderfoon.nl
+  http://wonderfoon.eu 
   ATTINY85 version
 */
 #include <EEPROM.h>

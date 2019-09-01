@@ -1,4 +1,4 @@
-
+ 
 //void amplifier(bool onoff) {
 //     amplifierstate = onoff;
    //  digitalWrite(ampPin, 0);

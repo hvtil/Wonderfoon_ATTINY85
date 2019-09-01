@@ -1,4 +1,4 @@
-void waitForHook() {
+ void waitForHook() {
   // read the state hook switch into a local variable:
   int hookReading = digitalRead(hookPin);
   if (hookReading != hookState) {

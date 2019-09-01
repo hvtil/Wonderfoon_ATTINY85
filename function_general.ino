@@ -1,4 +1,4 @@
-void checkPlaying()
+ void checkPlaying()
 {
   if (digitalRead(busyPin) == 1)
   {
