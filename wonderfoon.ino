@@ -5,6 +5,7 @@
   //      added 112 alarm number message.
   
   http://wonderfoon.eu 
+  Herbert van Til
   ATTINY85 version
 */
 #include <EEPROM.h>
