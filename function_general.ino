@@ -1,18 +1,9 @@
- void checkPlaying()
+void checkPlaying()
 {
   if (digitalRead(busyPin) == 1)
   {
-    if (!playingRandom) {
-      
-     // if (amplifierstate){
-     // delay(1000);
-     // amplifier(0);
-     // }
-    }
-    else
-    {
+    if (playingRandom) {
       delay(1000);
-      //amplifier(1);
       playTrackInFolder(1, 1);
     }
   }
@@ -24,11 +15,8 @@ void clearLastDialed()
   lastDialed[1] = 21;
   lastDialed[2] = 22;
 }
-//other common functions
-
 
 void addLastNumber(int newNumber) {
-
   lastDialed[0] = lastDialed[1];
   lastDialed[1] = lastDialed[2];
   lastDialed[2] = newNumber;
@@ -43,24 +31,23 @@ void addLastTime(long newTime) {
 
 void checkAll()
 {
-
   switch (lastDialed[0])
   {
-   case 1:
+    case 1:
     //112
     if (lastDialed[1] == 1 && checkChangeTime())
       {
-
-        if ( lastDialed[2] = 2 )
+        if ( lastDialed[2] == 2 )
         {
           playAlarm();
+          clearLastDialed();
         }
-        clearLastDialed();
       }
       break;  
+    
     case 2:
-
-      if (lastDialed[1] == 1 && checkChangeTime())
+    //volume
+    if (lastDialed[1] == 1 && checkChangeTime())
       {
         EEPROM_storeVolume(lastDialed[2]);
         setMP3Volume(lastDialed[2]);
@@ -70,56 +57,50 @@ void checkAll()
       break;
 
     case 3:
-
+    //Folder
       if (lastDialed[1] == 1 && checkChangeTime())
       {
-
         if ( lastDialed[2] < 4 )
         {
           EEPROM_storeFolder(lastDialed[2]);
           playFolder(lastDialed[2]);
           folderNumber = lastDialed[2];
+          clearLastDialed();
         }
-        clearLastDialed();
       }
       break;
 
     case 4:
-
+    ///Random
       if (lastDialed[1] == 1 && checkChangeTime())
       {
-        //willekeurig
         if ( lastDialed[2] < 3 )
         {
           EEPROM_storePlayMode(lastDialed[2] - 1);
           playWillekeurig(lastDialed[2] - 1);
           playMode = lastDialed[2] - 1;
+          clearLastDialed();
         }
-        clearLastDialed();
       }
       break;
 
-
     case 5:
-
+    //continue
       if (lastDialed[1] == 1 && checkChangeTime())
       {
-        //willekeurig
-        if ( lastDialed[2] < 2 )
+        if ( lastDialed[2] == 1 )
         {
           playingRandom = true;
           playContinu();
-        }
-        clearLastDialed();
+          clearLastDialed();      
+        }        
       }
       break;
 
-
     case 9:
-
+    //reset
       if (lastDialed[1] == 9 && checkChangeTime())
       {
-        //willekeurig
         if ( lastDialed[2] == 9 )
         {
           playReset();
@@ -131,8 +112,8 @@ void checkAll()
           playVolume();                                           // play vulume status
           playFolder(folderNumber);                               // play folder number status
           playWillekeurig(playMode);
+          clearLastDialed();
         }
-        clearLastDialed();
       }
       break;
 

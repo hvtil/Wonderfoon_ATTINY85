@@ -1,4 +1,4 @@
- void waitForHook() {
+void waitForHook() {
   // read the state hook switch into a local variable:
   int hookReading = digitalRead(hookPin);
   if (hookReading != hookState) {
@@ -14,7 +14,6 @@
       pulseCount = 0;
       MP3stop();                             // Stop MP3Player
       mp3Sleep();
-     
     }
   }
 
@@ -23,10 +22,12 @@
     //checkPlaying();
   }
   hookState = hookReading;    //store current status in lastHookState for bounceTime check
+  //random(1, 40);                              // just do a lot of randoms every cycle 1 to make random real random
 }
 
 void waitForDial()
 {
+  random(1, 40);                              // just do a lot of randoms every cycle 1 to make random real random
   int dialReading = digitalRead(dialPin);
   if (dialReading != lastDialState) {
     // reset the debouncing timer
