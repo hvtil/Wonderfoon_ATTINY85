@@ -5,7 +5,7 @@
   //      added 112 alarm number message.
   //      make Random() realy random by adding random every cycle.9
   
-  http://wonderfoon.nl
+  http://www.wonderfoon.eu
   ATTINY85 version
 */
 
